@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>24-Hour UV Index</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.weatherbit.io/js/v2.0/weatherbit.min.js"></script>
+  <style>
+    svg {
+      border: 1px solid black;
+      background-color: white;
+    }
+    label {
+      color: white;
+    }
+    circle {
+      fill: transparent;
+    }
+  </style>
+</head>
+<body>
+<h1 style="color:white">24-Hour UV Index</h1>
+<div>
+  <label for="city">City:</label>
+  <select id="city" name="city">
+    <option value="Melbourne">Melbourne</option>
+    <option value="Geelong">Geelong</option>
+    <option value="Ballarat">Ballarat</option>
+    <option value="Bendigo">Bendigo</option>
+    <option value="Shepparton">Shepparton</option>
+    <option value="Wodonga">Wodonga</option>
+    <option value="Mildura">Mildura</option>
+    <!-- Add more cities as needed -->
+  </select>
+  <button id="submit">Submit</button>
+</div>
+<div id="chart"></div>
+<script>
+  const apiKey = '782a5c2830bf47849d6b54b40e7be3a5';
+  const state = 'Victoria';
+
+  const getUvIndexData = (city) => {
+    const url = `https://api.weatherbit.io/v2.0/forecast/hourly?city=${city},${state}&key=${apiKey}`;
+
+    d3.json(url)
+            .then(data => {
+              const dataset = data.data.map(hour => {
+                return {
+                  x: new Date(hour.timestamp_local),
+                  y: hour.uv != null ? parseFloat(hour.uv.toFixed(1)) : 0
+                };
+              });
+
+              updateChart(dataset, data.city_name, data.state_code);
+            })
+            .catch(error => console.error(error));
+  };
+  const uvThreatLevel = (uv) => {
+    if (uv < 3) {
+      return "Low";
+    } else if (uv >= 3 && uv < 6) {
+      return "Moderate";
+    } else if (uv >= 6 && uv < 8) {
+      return "High";
+    } else if (uv >= 8 && uv < 11) {
+      return "Very High";
+    } else {
+      return "Extreme";
+    }
+  };
+  const tooltip = d3.select('body')
+          .append('div')
+          .style('position', 'absolute')
+          .style('visibility', 'hidden')
+          .style('background-color', 'white')
+          .style('padding', '10px')
+          .style('border', '1px solid black')
+          .style('border-radius', '5px')
+          .text('');
+
+  const svg = d3.select('#chart')
+          .append('svg')
+          .attr('width', 800)
+          .attr('height', 400);
+
+  const xScale = d3.scaleTime()
+          .domain([new Date(), new Date(new Date().setHours(new Date().getHours() + 24))])
+          .range([10, 750]);
+
+  const xAxis = d3.axisBottom(xScale)
+          .ticks(d3.timeHour.every(1))
+          .tickFormat(d3.timeFormat("%H:%M"))
+          .tickSizeOuter(0);
+
+  svg.append('g')
+          .attr('transform', 'translate(30, 350)')
+          .call(xAxis);
+
+  svg.append('text')
+          .attr('x', 400)
+          .attr('y', 390)
+          .attr('text-anchor', 'middle')
+          .text('Time (24-hour format)');
+
+  const updateChart = (dataset, cityName, stateCode) => {
+    const yScale = d3.scaleLinear()
+            .domain([0, d3.max(dataset, d => d.y)])
+            .range([350, 50]);
+
+    const line = d3.line()
+            .x(d => xScale(d.x))
+            .y(d => yScale(d.y));
+
+    svg.selectAll('path').remove();
+    svg.selectAll('circle').remove();
+    svg.selectAll('.y-axis').remove();
+    svg.selectAll('.chart-title').remove();
+    svg.append('path')
+            .datum(dataset)
+            .attr('d', line)
+            .attr('fill', 'none')
+            .attr('stroke', 'steelblue')
+            .attr('stroke-width', 2);
+
+    svg.selectAll('circle')
+            .data(dataset)
+            .enter()
+            .append('circle')
+            .attr('cx', d => xScale(d.x))
+            .attr('cy', d => yScale(d.y))
+            .attr('r', 5)
+            .attr('fill', 'steelblue')
+            .on('mouseover', (event, d) => {
+              tooltip.html(`UV: ${d.y}`)
+                      .style('visibility', 'visible');
+              d3.select(event.currentTarget)
+                      .attr('fill', 'steelblue')
+                      .attr('r', 8);
+            })
+            .on('mousemove', event => {
+              tooltip.style('top', (event.pageY-10)+'px')
+                      .style('left',(event.pageX+10)+'px');
+            })
+            .on('mouseout', event => {
+              tooltip.style('visibility', 'hidden');
+              d3.select(event.currentTarget)
+                      .attr('fill', 'steelblue')
+                      .attr('r', 5)
+                      .on('mouseover', (event, d) => {
+                        tooltip.html(`UV: ${d.y} (${uvThreatLevel(d.y)})`)
+                                .style('visibility', 'visible');
+                        d3.select(event.currentTarget)
+                                .attr('fill', 'steelblue')
+                                .attr('r', 8);
+                      })
+            });
+    const icons = svg.selectAll('.sun-icon')
+            .data(dataset)
+            .enter()
+            .append('image')
+            .attr('class', 'sun-icon')
+            .attr('xlink:href', 'https://cdn-icons-png.flaticon.com/512/979/979585.png') // Set the image source
+            .attr('x', d => xScale(d.x) - 6) // Shift icon to center it on the data point
+            .attr('y', d => yScale(d.y) - 6) // Shift icon to center it on the data point
+            .attr('width', 12) // Adjust the size of the icon
+            .attr('height', 12) // Adjust the size of the icon
+            .on('mouseover', (event, d) => {
+              tooltip.html(`UV: ${d.y}`)
+                      .style('visibility', 'visible');
+            })
+            .on('mousemove', event => {
+              tooltip.style('top', (event.pageY-10)+'px')
+                      .style('left',(event.pageX+10)+'px');
+            })
+            .on('mouseout', event => {
+              tooltip.style('visibility', 'hidden')
+                      .on('mouseover', (event, d) => {
+                        tooltip.html(`UV: ${d.y} (${uvThreatLevel(d.y)})`)
+                                .style('visibility', 'visible');
+                      })
+            });
+
+    const yAxis = d3.axisLeft(yScale)
+            .ticks(5)
+            .tickSizeOuter(0);
+
+    svg.append('g')
+            .attr('transform', 'translate(50, 0)')
+            .attr('class', 'y-axis')
+            .call(yAxis);
+
+    svg.append('text')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -200)
+            .attr('y', 20)
+            .attr('text-anchor', 'middle')
+            .text('UV Index');
+
+    svg.append('text')
+            .attr('x', 400)
+            .attr('y', 30)
+            .attr('text-anchor', 'middle')
+            .attr('class', 'chart-title')
+            .text(`24-Hour UV Index for ${cityName}, ${stateCode}`);
+  };
+
+  d3.select('#submit').on('click', () => {
+    const city = d3.select('#city').property('value');
+    getUvIndexData(city);
+    d3.selectAll('circle').remove(); // Remove the existing circles
+    d3.selectAll('.sun-icon').remove(); // Remove the existing sun icons
+    d3.select('svg').append('path').attr('d', 'M0,0');
+    d3.json(newUrl)
+            .then(data => {
+              // ...
+
+              // Update the code for the circles and sun icons in the click event
+              const circles = svg.selectAll('circle')
+              // ...
+
+              const icons = svg.selectAll('.sun-icon')
+                      .data(dataset)
+                      .enter()
+                      .append('image')
+                      .attr('class', 'sun-icon')
+                      .attr('xlink:href', 'https://cdn-icons-png.flaticon.com/512/979/979585.png')
+                      .attr('x', d => xScale(d.x) - 6)
+                      .attr('y', d => yScale(d.y) - 6)
+                      .attr('width', 12)
+                      .attr('height', 12)
+                      .on('mouseover', (event, d) => {
+                        tooltip.html(`UV: ${d.y} (${uvThreatLevel(d.y)})`)
+                                .style('visibility', 'visible');
+                      })
+                      .on('mousemove', event => {
+                        tooltip.style('top', (event.pageY-10)+'px')
+                                .style('left',(event.pageX+10)+'px');
+                      })
+                      .on('mouseout', event => {
+                        tooltip.style('visibility', 'hidden');
+                      });
+            })
+            .catch(error => console.error(error));
+  });
+
+  // Initial load
+  const initialCity = d3.select('#city').property('value');
+  getUvIndexData(initialCity);
+</script>
+</body>
+</html>
