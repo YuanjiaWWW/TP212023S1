@@ -1,0 +1,154 @@
+<html>
+<div class="container">
+        <!-- <p> The default options should be manually changed.<br>
+            
+        </p> -->
+
+        <form class="dropdown" action = "" method="post" enctype="multipart/form-data">
+
+            <div class="rowTab">
+                <div class="labels">
+                  <label for="Location">Location: </label>
+                </div>
+                <div class="rightTab">
+                  <select id="dropdown-location" name="location" class="dropdown" onchange="getIndex();">
+                  <option selected="selected" value="Australia">Australia</option>
+                  <option value="ACT">ACT</option>
+                  <option value="NSW">NSW</option>
+                  <option value="NT">NT</option>
+                  <option value="QLD">QLD</option>
+                  <option value="SA">SA</option>
+                  <option value="TAS">TAS</option>
+                  <option value="VIC">VIC</option>
+                  <option value="WA">WA</option>
+                  </select>
+                </div>
+              </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                  <label for="Year">Year: </label>
+                </div>
+                <div class="rightTab">
+                  <select id="dropdown-year" name="year" class="dropdown" onchange="getIndex();">
+                  <option selected="selected" value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                  </select>
+                </div>
+              </div>
+        </form>
+
+    </div>
+    
+    <div id="annual2020">
+        <div id="container" style="height: 200px;"></div>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-cartesian.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+<script>
+anychart.onDocumentReady(function () {
+
+    // create a data set
+    var data = anychart.data.set([
+      ["NSW", 132408],
+      ["QLD", 159202],
+      ["VIC", 83274],
+    ]);
+
+    // create a chart
+    var chart = anychart.bar();
+
+    // create a bar series and set the data
+    var series = chart.bar(data);
+
+    // set the chart title
+    chart.title("Annual Emission Top 3 States, 2020");
+
+    // set the titles of the axes
+    chart.xAxis().title("States");
+    chart.yAxis().title("Co2,t");
+
+    // set the container id
+    chart.container("container");
+
+    // initiate drawing the chart
+    chart.draw();
+});
+</script>
+    </div>
+    <div id="annual2019">
+        <div id="container" style="height: 200px;"></div>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-cartesian.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+<script>
+anychart.onDocumentReady(function () {
+
+    // create a data set
+    var data = anychart.data.set([
+      ["NSW", 135279],
+      ["QLD", 161178],
+      ["WA", 91217],
+    ]);
+
+    // create a chart
+    var chart = anychart.bar();
+
+    // create a bar series and set the data
+    var series = chart.bar(data);
+
+    // set the chart title
+    chart.title("Annual Emission Top 3 States, 2019");
+
+    // set the titles of the axes
+    chart.xAxis().title("States");
+    chart.yAxis().title("Co2,t");
+
+    // set the container id
+    chart.container("container");
+
+    // initiate drawing the chart
+    chart.draw();
+});
+</script>
+    </div>
+
+<script>
+    var probabilityoutput = document.getElementById('annual2020');
+    var probabilityoutput = document.getElementById('annual2019');
+    
+    var ran = 100;
+    if (ran == 100)
+    {
+        document.getElementById("annual2020").style.display = "";
+        document.getElementById("annual2019").style.display = "";
+    }
+    else
+    {
+        document.getElementById("annual2020").style.display = "none";
+        document.getElementById("annual2019").style.display = "none";
+    }
+    
+    function getIndex(){
+    var optionLocation= document.getElementById('dropdown-location').value;
+    console.log(optionLocation);
+    var optionYear = document.getElementById('dropdown-year').value;
+    console.log(optionYear);
+    if (optionLocation == "Australia" && optionYear == "2020")
+    {
+        document.getElementById("annual2020").style.display = "";
+        document.getElementById("annual2019").style.display = "none";
+    }
+    else
+    {
+        document.getElementById("annual2020").style.display = "";
+        document.getElementById("annual2019").style.display = "none";
+    }
+    }
+</script>
+</html>
+    
