@@ -1,0 +1,115 @@
+<html>
+    <center>
+<div style = "color:white; font-size:20px;">
+    <div class="container">
+        <form class="dropdown" action="" method="post" enctype="multipart/form-data">
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="location">Location: </label>
+                </div>
+                <div class="rightTab">
+                    <select id="dropdown-location" name="location" class="dropdown" onchange="getIndex();">
+                        <option selected="selected" value="Australia">Australia</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="year">Year: </label>
+                </div>
+                <div class="rightTab">
+                    <select id="dropdown-year" name="year" class="dropdown" onchange="getIndex();">
+                        <option selected="selected" value="">-select-</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <br><br>
+
+    <form class="search-container">
+
+
+
+        <p class="output" id="dect" style = "color:white;"></p>
+        <p class="moreinfo" id="moreinfo"  style = "color:white;"></p>
+
+    </form>
+</div>
+            </center>
+        
+
+
+
+
+
+<script>
+
+    var output = document.getElementById('dect');
+    var moreInfo = document.getElementById('moreinfo');
+
+    let annual2020G = document.getElementById('annual2020');
+    let annual2019g = document.getElementById('annual2019');
+
+    var ranf = 100;
+    if (ranf == 100) {
+        document.getElementById("annual2020").style.display = "none";
+        document.getElementById("annual2019").style.display = "none";
+    }
+
+    function getIndex() {
+        var optionLocation = document.getElementById('dropdown-location').value;
+        console.log(optionLocation);
+
+        var optionYear = document.getElementById('dropdown-year').value;
+        console.log(optionLocation);
+
+        if (optionLocation == 'Australia' && optionYear == '2020') {
+            output.innerHTML = "2020 Australia total emission: 498,112 t.";
+            moreInfo.innerHTML = "2020 annual emission top3: NSW, QLD, VIC";
+        }
+        else if (optionLocation == 'Australia' && optionYear == '2019')
+        {
+            output.innerHTML = "2019 Australia total emission: 516,798 t.";
+            moreInfo.innerHTML = "2019 annual emission top3: NSW, QLD, WA";
+        }
+        else if (optionLocation == 'Australia' && optionYear == '2018')
+        {
+            output.innerHTML = "2018 Australia total emission: 529,999 t.";
+            moreInfo.innerHTML = "2018 annual emission top3: NSW, QLD, VIC";
+        }
+        else if (optionLocation == 'Australia' && optionYear == '2017')
+        {
+            output.innerHTML = "2017 Australia total emission: 524,157 t.";
+            moreInfo.innerHTML = "2017 annual emission top3: NSW, QLD, VIC";
+        }
+        else if (optionLocation == 'Australia' && optionYear == '2016')
+        {
+            output.innerHTML = "2016 Australia total emission: 525,228 t.";
+            moreInfo.innerHTML = "2016 annual emission top3: NSW, QLD, VIC";
+        }
+        else if (optionLocation == 'Australia' && optionYear == '2015')
+        {
+            output.innerHTML = "2015 Australia total emission: 549,497 t.";
+            moreInfo.innerHTML = "2015 annual emission top3: NSW, QLD, VIC";
+        }
+        else {
+            output.innerHTML = "";
+            moreInfo.innerHTML = "";
+            document.getElementById("annual2020").style.display = "none";
+            document.getElementById("annual2019").style.display = "none";
+        }
+    }
+
+</script>
+
+</html>
