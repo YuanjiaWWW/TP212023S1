@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXoViTS_kStNg4h2ZQdVRC4md8b6RrJQM &amp;libraries=places,directions"></script>
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+    body {
+      color: white;
+    }
+  </style>
+</head>
+<body data-rsssl=1 data-rsssl=1 data-rsssl=1>
+
+<div class="container">
+  <h2 style="color:white">Transportation Mode Comparison</h2>
+  <form>
+    <div class="form-group">
+      <label for="origin">Departure:</label>
+      <input type="text" class="form-control" id="origin" placeholder="Enter departure point" name="origin">
+    </div>
+    <div class="form-group">
+      <label for="destination">Destination:</label>
+      <input type="text" class="form-control" id="destination" placeholder="Enter destination" name="destination">
+    </div>
+    <div class="form-group">
+      <label for="mode1">Transportation option 1:</label>
+      <select class="form-control" id="mode1" name="mode1">
+        <option value="DRIVING">Drive</option>
+        <option value="TRANSIT">Public Transportation</option>
+        <option value="WALKING">Walk</option>
+        <option value="BICYCLING">Ride</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="mode2">Transportation option 2:</label>
+      <select class="form-control" id="mode2" name="mode2">
+        <option value="DRIVING">Drive</option>
+        <option value="TRANSIT">Public Transportation</option>
+        <option value="WALKING">Walk</option>
+        <option value="BICYCLING">Ride</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="calculateRoutes()">Compare Routes</button>
+  </form>
+  <br>
+  <div id="map"></div>
+  <div id="result"></div>
+</div>
+
+<script>
+  let map;
+  let directionsService;
+  let directionsRenderer1;
+  let directionsRenderer2;
+
+  function initMap() {
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer1 = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "blue" } });
+    directionsRenderer2 = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "red" } });
+
+    const defaultCenter = { lat: -37.8136, lng: 144.9631 }; // Default center point
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: defaultCenter,
+      zoom: 10
+    });
+
+    directionsRenderer1.setMap(map);
+    directionsRenderer2.setMap(map);
+
+    const originInput = document.getElementById("origin");
+    const destinationInput = document.getElementById("destination");
+
+    const originAutocomplete = new google.maps.places.Autocomplete(originInput);
+    const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+
+    originAutocomplete.bindTo("bounds", map);
+    destinationAutocomplete.bindTo("bounds", map);
+  }
+
+  function calculateRoutes() {
+    const origin = document.getElementById("origin").value;
+    const destination = document.getElementById("destination").value;
+    const mode1 = document.getElementById("mode1").value;
+    const mode2 = document.getElementById("mode2").value;
+
+    calculateRoute(origin, destination, mode1, directionsRenderer1);
+    calculateRoute(origin, destination, mode2, directionsRenderer2);
+    calculateCostAndEmissions(origin, destination, mode1, mode2);
+  }
+
+  function calculateRoute(origin, destination, mode, renderer) {
+    const request = {
+      origin: origin,
+      destination: destination,
+      travelMode: google.maps.TravelMode[mode],
+    };
+
+    directionsService.route(request, (result, status) => {
+      if (status == google.maps.DirectionsStatus.OK) {
+        renderer.setDirections(result);
+      } else {
+        window.alert("Unable to get directions, reason: " + status);
+      }
+    });
+  }
+
+  function calculateCostAndEmissions(origin, destination, mode1, mode2) {
+    const drivingFuelConsumption = 7; // liters per kilometer
+    const drivingEmissionsFactor = 2.31; // kg of carbon emissions per liter
+
+    const transitFuelConsumption = 0.6; // liters per kilometer
+    const transitEmissionsFactor = 2.68; // kg of carbon emissions per liter
+
+    const walkingCost = 0;
+    const walkingEmissions = 0;
+
+    const cyclingCost = 0;
+    const cyclingEmissions = 0;
+
+    calculateDistance(origin, destination)
+            .then(distance => {
+              let mode1Cost = 0;
+              let mode1Emissions = 0;
+
+              let mode2Cost = 0;
+              let mode2Emissions = 0;
+
+              if (mode1 === "DRIVING") {
+                mode1Cost = drivingFuelConsumption * distance;
+                mode1Emissions = drivingFuelConsumption * drivingEmissionsFactor * distance;
+              } else if (mode1 === "TRANSIT") {
+                mode1Cost = transitFuelConsumption * distance;
+                mode1Emissions = transitFuelConsumption * transitEmissionsFactor * distance;
+              } else if (mode1 === "WALKING") {
+                mode1Cost = walkingCost;
+                mode1Emissions = walkingEmissions;
+              } else if (mode1 === "BICYCLING") {
+                mode1Cost = cyclingCost;
+                mode1Emissions = cyclingEmissions;
+              }
+
+              if (mode2 === "DRIVING") {
+                mode2Cost = drivingFuelConsumption * distance;
+                mode2Emissions = drivingFuelConsumption * drivingEmissionsFactor * distance;
+              } else if (mode2 === "TRANSIT") {
+                mode2Cost = transitFuelConsumption * distance;
+                mode2Emissions = transitFuelConsumption * transitEmissionsFactor * distance;
+              } else if (mode2 === "WALKING") {
+                mode2Cost = walkingCost;
+                mode2Emissions = walkingEmissions;
+              } else if (mode2 === "BICYCLING") {
+                mode2Cost = cyclingCost;
+                mode2Emissions = cyclingEmissions;
+              }
+
+              displayComparison(mode1, mode2, mode1Cost, mode2Cost, mode1Emissions, mode2Emissions);
+            })
+            .catch(error =>{
+              window.alert("Error calculating distance: " + error.message);
+            });
+  }
+
+  function calculateDistance(origin, destination) {
+    return new Promise((resolve, reject) => {
+      const geocoder = new google.maps.Geocoder();
+
+      geocoder.geocode({ address: origin }, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          const originLatLng = results[0].geometry.location;
+
+          geocoder.geocode({ address: destination }, (results, status) => {
+            if (status === google.maps.GeocoderStatus.OK) {
+              const destLatLng = results[0].geometry.location;
+
+              const distance = calculateHaversine(
+                      originLatLng.lat(),
+                      originLatLng.lng(),
+                      destLatLng.lat(),
+                      destLatLng.lng()
+              );
+
+              resolve(distance);
+            } else {
+              reject(new Error("Unable to geocode the destination address."));
+            }
+          });
+        } else {
+          reject(new Error("Unable to geocode the origin address."));
+        }
+      });
+    });
+  }
+
+  function calculateHaversine(lat1, lon1, lat2, lon2) {
+    const earthRadius = 6371; // Earth's radius in kilometers
+
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
+
+    const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = earthRadius * c;
+    return distance;
+  }
+
+  function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+  }
+
+  function displayComparison(mode1, mode2, mode1Cost, mode2Cost, mode1Emissions, mode2Emissions) {
+    const resultContainer = document.getElementById("result");
+    resultContainer.innerHTML = `
+        <h3 style="color: white;">Comparison Results:</h3>
+        <p>Mode 1: ${mode1}</p>
+        <p>Mode 2: ${mode2}</p>
+        <p>Cost of Mode 1: $${mode1Cost.toFixed(2)}</p>
+        <p>Cost of Mode 2: $${mode2Cost.toFixed(2)}</p>
+        <p>Carbon Emissions of Mode 1: ${mode1Emissions.toFixed(2)} kg</p>
+        <p>Carbon Emissions of Mode 2: ${mode2Emissions.toFixed(2)} kg</p>
+    `;
+  }
+
+  google.maps.event.addDomListener(window, "load", initMap);
+</script>
+</body>
+</html>
