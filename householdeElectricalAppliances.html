@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Energy Calculator</title>
+  <style>
+  .brand-container {
+    display: inline-block;
+    margin-right: 10px;
+  }
+   body {
+    color: white;
+  }
+
+  .h2-white {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+</style>
+  </style>
+</head>
+<body data-rsssl=1 data-rsssl=1 data-rsssl=1>
+<div id="content">
+  <h1 style="color:white">Energy Calculator</h1>
+  <div id="brand-checkboxes"></div>
+  <button id="submit" onclick="calculateTotalEnergy()">Calculate Total Energy</button>
+  <div>Total Energy: <span id="total-energy">0</span></div>
+</div>
+<script>
+  const categories = [
+    {
+      name: 'Fridge',
+      brands: [
+        {
+          name: 'Beko',
+          models: [
+            { Model_No: 'BVF290W', Energy_Per_Hour: 41 },
+            { Model_No: 'BAF369W', Energy_Per_Hour: 27 },
+            { Model_No: 'BVF404W', Energy_Per_Hour: 34 }
+          ]
+        },
+        {
+          name: 'Electrolux',
+          models: [
+            { Model_No: 'EHE6899BA', Energy_Per_Hour: 57 }
+          ]
+        },
+        {
+          name: 'LG',
+          models: [
+            { Model_No: 'GB-455UPLE', Energy_Per_Hour: 40 },
+            { Model_No: 'GB-455WL', Energy_Per_Hour: 33 },
+            { Model_No: 'GB-455PL', Energy_Per_Hour: 34 },
+            { Model_No: 'GB-455MBL', Energy_Per_Hour: 33 }
+          ]
+        },
+        {
+          name: 'Westinghouse',
+          models: [
+            { Model_No: 'WHE6000SB', Energy_Per_Hour: 50 },
+            { Model_No: 'WQE6000BB', Energy_Per_Hour: 50 }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'AC',
+      brands: [
+        {
+          name: 'Kelvinator',
+          models: [
+            { Model_No: 'KSD71HWJ', Energy_Per_Hour: 592 },
+            { Model_No: 'KSD25HWJ', Energy_Per_Hour: 208.3 },
+            { Model_No: 'KSD90HWJ', Energy_Per_Hour: 900 },
+            { Model_No: 'KWH27CRF', Energy_Per_Hour: 300 },
+            { Model_No: 'KWH39HRF', Energy_Per_Hour: 325 },
+            { Model_No: 'KSD50HWJ', Energy_Per_Hour: 500 },
+            { Model_No: 'KWH52HRF', Energy_Per_Hour: 578 },
+            { Model_No: 'KWH22CRF', Energy_Per_Hour: 275 }
+          ]
+        },
+        {
+          name: 'Dimplex',
+          models: [
+            { Model_No: 'DCP14MULTI', Energy_Per_Hour: 363.6 },
+            { Model_No: 'DCP11MULTI', Energy_Per_Hour: 275 }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Washers',
+      brands: [
+        {
+          name: 'Asko',
+          models: [
+            { Model_No: 'W4086C',Energy_Per_Hour: 244},
+            { Model_No: 'W2084C' ,Energy_Per_Hour: 253}
+          ]
+        },
+        {
+          name: 'Beko',
+          models: [
+            { Model_No: 'BFL7510-W',Energy_Per_Hour:298},
+            { Model_No: 'BFL1010W',Energy_Per_Hour: 403}
+          ]
+        },
+        {
+          name: 'Bosch',
+          models: [
+            { Model_No: 'WAW28620AU',Energy_Per_Hour:320},
+            { Model_No: 'WAW28460AU' ,Energy_Per_Hour:269}
+          ]
+        },
+        {
+          name: 'Fisher & Paykel',
+          models: [
+            { Model_No: 'WH8060J3',Energy_Per_Hour:280},
+            { Model_No: 'WH8560P3' ,Energy_Per_Hour:63
+            }
+          ]
+        },
+        {
+          name: 'LG',
+          models: [
+            { Model_No: 'WV5-1410W',Energy_Per_Hour:319}
+          ]
+        },
+        {
+          name: 'Samsung',
+          models: [
+            { Model_No: 'WW85T554DAW' ,Energy_Per_Hour:350}
+          ]
+        }
+      ]
+    },
+    {
+      name: 'TV',
+      brands: [
+        {
+          name: 'SAMSUNG',
+          models: [
+            { Model_No: 'UA43CU8000W', Energy_Per_Hour: 29.6 },
+            { Model_No: 'UA50CU8000W', Energy_Per_Hour: 37.4 },
+            { Model_No: 'UA55CU8000W', Energy_Per_Hour: 41.1 },
+            { Model_No: 'UA65BU8000W', Energy_Per_Hour: 52.6 },
+            { Model_No: 'UA55BU8000W', Energy_Per_Hour: 47.4 }
+          ]
+        },
+        {
+          name: 'LG',
+          models: [
+            { Model_No: 'OLED65CSPSA', Energy_Per_Hour: 52.6 }
+          ]
+        },
+        {
+          name: 'HISENSE',
+          models: [
+            { Model_No: '75A7HAU', Energy_Per_Hour: 60.2 },
+            { Model_No: '40A4HAU', Energy_Per_Hour: 15.4 },
+            { Model_No: '65A7HAU', Energy_Per_Hour: 47.4 }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Clothes_dryer',
+      brands: [
+        {
+          name: 'Beko',
+          models: [
+            { Model_No: 'BDP710W' , Energy_Per_Hour:139}
+          ]
+        },
+        {
+          name: 'Bosch',
+          models: [
+            { Model_No: 'WTW87564AU', Energy_Per_Hour:152}
+          ]
+        },
+        {
+          name: 'Electrolux',
+          models: [
+            { Model_No: 'EDV705H3WB', Energy_Per_Hour:145},
+            { Model_No: 'EDV605H3WB', Energy_Per_Hour:155}
+          ]
+        },
+        {
+          name: 'Fisher & Paykel',
+          models: [
+            { Model_No: 'DE7060G2', Energy_Per_Hour:167},
+            { Model_No: 'DE6060M2', Energy_Per_Hour:82}
+          ]
+        },
+        {
+          name: 'LG',
+          models: [
+            { Model_No: 'DVH5-08W' , Energy_Per_Hour:156}
+          ]
+        },
+        {
+          name: 'Westinghouse',
+          models: [
+            {Model_No: 'WDV457H3WB', Energy_Per_Hour:219},
+          ]
+        },
+        {
+          name: 'Westinghouse',
+          models: [
+            { Model_No: 'WDV457H3WB', Energy_Per_Hour:219},
+            { Model_No: 'WDV556N3WB', Energy_Per_Hour: 247},
+            { Model_No: 'WDV656N3WB' , Energy_Per_Hour:292}
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Desktop',
+      brands: [
+        {
+          name: 'Apple',
+          models: [
+            { Model_No: 'iMac', Energy_Per_Hour: 43 },
+            { Model_No: 'Mac_mini', Energy_Per_Hour: 50 }
+          ]
+        },
+        {
+          name: 'Asus',
+          models: [
+            { Model_No: 'M3400WYAK-WA016W', Energy_Per_Hour: 90 }
+          ]
+        },
+        {
+          name: 'Dell',
+          models: [
+            { Model_No: 'RDI541501AU', Energy_Per_Hour: 90 }
+          ]
+        },
+        {
+          name: 'Lenovo',
+          models: [
+            { Model_No: '90RC00RDAU', Energy_Per_Hour: 50 },
+            { Model_No: 'F0GQ0049AU', Energy_Per_Hour: 90 },
+            { Model_No: 'F0G100JAAU', Energy_Per_Hour: 90 }
+          ]
+        },
+        {
+          name: 'MSI',
+          models: [
+            { Model_No: '5686424', Energy_Per_Hour: 100 },
+            { Model_No: '5688528', Energy_Per_Hour: 65 },
+            { Model_No: '5686469', Energy_Per_Hour: 65 }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Monitors',
+      brands: [
+        {
+          name: 'Alienware',
+          models: [
+            { Model_No: 'AW3821DW', Energy_Per_Hour: 75 },
+            { Model_No: 'AW3423DW', Energy_Per_Hour: 112 }
+          ]
+        },
+        {
+          name: 'Dell',
+          models: [
+            { Model_No: 'S2422HG', Energy_Per_Hour: 78 },
+            { Model_No: 'SE2422H', Energy_Per_Hour: 58 },
+            { Model_No: 'SE2722H', Energy_Per_Hour: 70 }
+          ]
+        },
+        {
+          name: 'LG',
+          models: [
+            { Model_No: '27ML600M', Energy_Per_Hour: 71 },
+            { Model_No: '27UL500', Energy_Per_Hour: 129 },
+            { Model_No: '24MD4KL', Energy_Per_Hour: 150 },
+            { Model_No: '27MD5KL', Energy_Per_Hour: 150 },
+            { Model_No: '24ML600M', Energy_Per_Hour: 57 }
+          ]
+        }
+      ]
+    }
+  ];
+  function displayBrands() {
+    const brandCheckboxes = document.getElementById('brand-checkboxes');
+
+    categories.forEach(category => {
+      const title = document.createElement('div');
+      title.textContent = category.name;
+      title.classList.add('h2-white');
+      brandCheckboxes.appendChild(title);
+
+      category.brands.forEach(brand => {
+        const brandContainer = document.createElement('div');
+        brandContainer.className = 'brand-container';
+        brandContainer.dataset.brand = brand.name;
+        brandContainer.dataset.category = category.name;
+
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = 'brand';
+        checkbox.value = brand.name;
+        checkbox.onchange = () => updateModels(brand.name, category.name);
+
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(brand.name));
+        brandContainer.appendChild(label);
+        brandCheckboxes.appendChild(brandContainer);
+      });
+    });
+  }
+
+function updateModels(brandName, categoryName) {
+  const brandContainer = document.querySelector(`.brand-container[data-brand="${brandName}"][data-category="${categoryName}"]`);
+  const isChecked = document.querySelector(`input[name="brand"][value="${brandName}"]:checked`);
+
+  if (!brandContainer || !isChecked) {
+    if (brandContainer) {
+      const modelsContainer = brandContainer.querySelector('.models-container');
+      if (modelsContainer) {
+        brandContainer.removeChild(modelsContainer);
+      }
+    }
+    return;
+  }
+
+  const modelsContainer = document.createElement('div');
+  modelsContainer.className = 'models-container';
+
+  categories.forEach(category => {
+    if (category.name === categoryName) {
+      category.brands.filter(brand => brand.name === brandName).forEach(brand => {
+        brand.models.forEach(({ Model_No, Energy_Per_Hour }) => {
+          const modelDiv = document.createElement('div');
+          modelDiv.className = 'item-container';
+
+          const modelLabel = document.createElement('label');
+          modelLabel.className = 'item';
+          modelLabel.textContent = `${Model_No} - Energy per hour: ${Energy_Per_Hour}`;
+
+          const quantityInput = document.createElement('input');
+          quantityInput.className = 'item';
+          quantityInput.type = 'number';
+          quantityInput.min = 0;
+          quantityInput.placeholder = 'Quantity';
+          quantityInput.dataset.energy = Energy_Per_Hour;
+
+          modelDiv.appendChild(modelLabel);
+          modelDiv.appendChild(quantityInput);
+
+          modelsContainer.appendChild(modelDiv);
+        });
+      });
+    }
+  });
+
+  brandContainer.appendChild(modelsContainer);
+
+  const itemContainers = brandContainer.querySelectorAll('.item-container');
+  itemContainers.forEach((item) => {
+    item.style.display = 'inline-block';
+    item.style.marginRight = '10px';
+  });
+}
+
+
+
+
+  function calculateTotalEnergy() {
+    const quantities = document.querySelectorAll('.models-container input');
+    const totalEnergy = [...quantities].reduce((sum, input) => {
+      const quantity = parseFloat(input.value) || 0;
+      const energyPerHour = parseFloat(input.dataset.energy) || 0;
+      return sum + (quantity * energyPerHour);
+    }, 0);
+    document.getElementById('total-energy').textContent = totalEnergy.toFixed(2);
+  }
+
+  displayBrands();
+</script>
+</body>
+</html>
