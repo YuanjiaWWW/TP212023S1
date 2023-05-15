@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .button-container{
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+  </style>
+</head>
+<div class="button-container">
+  <button id="play">
+    Play game
+  </button>
+  <button id="stop">
+    close game
+  </button>
+</div>
+<br>
+<br>
+<div>
+  <iframe id="game" src="" width="700px" height="375px" frameborder="0" scrolling="no" style="display:none"> </iframe>
+  <img id="Cover" src="https://www.olugw.com/wp-content/uploads/2023/05/6be84da20a3e99c97199adb62708893.png" style="display: block;
+  margin-left: auto;
+  margin-right: auto;">
+</div>
+<script type="text/javascript">
+  jQuery(document).ready(function($){
+    $('#play').click(function(){
+      $('#game').attr('src', 'https://www.olugw.com/game').show();
+      $('#Cover').hide();
+    });
+  });
+  jQuery(document).ready(function($){
+    $('#stop').click(function(){
+
+      $('#game').attr('src', '').hide();
+      $('#Cover').show();
+
+      $('body').append(img);
+    });
+  });
+</script>
+</html>
