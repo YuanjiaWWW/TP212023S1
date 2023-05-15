@@ -1,0 +1,773 @@
+<html>
+<div style="color: #ffff; width: 850px;">
+        <div class="container" style="color: #ffff; width:300px; float:left;">
+
+            <form class="dropdown" action="" method="post" enctype="multipart/form-data">
+
+                <div class="rowTab">
+                    <div class="labels">
+                        <label for="Crop">Crop: </label>
+                    </div>
+                    <div class="rightTab">
+                        <select id="dropdown-Crop" name="Crop" onchange="getIndex();">
+                            <option selected="selected" value="">-Please Select-</option>
+                            <option value="Arugula">Arugula</option>
+                            <option value="Basil">Basil</option>
+                            <option value="Beets">Beets</option>
+                            <option value="Bell Peppers">Bell Peppers</option>
+                            <option value="Bok Choy">Bok Choy</option>
+                            <option value="Broccoli">Broccoli</option>
+                            <option value="Cabbage">Cabbage</option>
+                            <option value="Cantaloupes">Cantaloupes</option>
+                            <option value="Carrots">Carrots</option>
+                            <option value="Cauliflower">Cauliflower</option>
+                            <option value="Celery">Celery</option>
+                            <option value="Chives">Chives</option>
+                            <option value="Cilantro (Coriander)">Cilantro (Coriander)</option>
+                            <option value="Collards">Collards</option>
+                            <option value="Corn">Corn</option>
+                            <option value="Cucumbers">Cucumbers</option>
+                            <option value="Dill">Dill</option>
+                            <option value="Eggplants">Eggplants</option>
+                            <option value="Fava Beans (Broad Beans)">Fava Beans (Broad Beans)</option>
+                            <option value="Green Beans">Green Beans</option>
+                            <option value="Jalapeño Peppers">Jalapeño Peppers</option>
+                            <option value="Kale">Kale</option>
+                            <option value="Kohlrabi">Kohlrabi</option>
+                            <option value="Lettuce">Lettuce</option>
+                            <option value="Okra">Okra</option>
+                            <option value="Onions">Onions</option>
+                            <option value="Oregano">Oregano</option>
+                            <option value="Parsley">Parsley</option>
+                            <option value="Parsnips">Parsnips</option>
+                            <option value="Peas">Peas</option>
+                            <option value="Potatoes">Potatoes</option>
+                            <option value="Pumpkins">Pumpkins</option>
+                            <option value="Radishes">Radishes</option>
+                            <option value="Rosemary">Rosemary</option>
+                            <option value="Sage">Sage</option>
+                            <option value="Spinach">Spinach</option>
+                            <option value="Sweet Potatoes">Sweet Potatoes</option>
+                            <option value="Swiss Chard">Swiss Chard</option>
+                            <option value="Thyme">Thyme</option>
+                            <option value="Tomatillos">Tomatillos</option>
+                            <option value="Tomatoes">Tomatoes</option>
+                            <option value="Turnips">Turnips</option>
+                            <option value="Watermelons">Watermelons</option>
+                            <option value="Winter Squash">Winter Squash</option>
+                            <option value="Zucchini and Summer Squash">Zucchini and Summer Squash</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="rowTab">
+                    <div class="labels">
+                        <label for="Planting Dates">Planting Dates: </label>
+                    </div>
+                    <div class="rightTab">
+                        <select id="dropdown-Planting Dates" name="Planting Dates" onchange="getIndex();">
+                            <option selected="selected" value="">-Please Select-</option>
+                            <option value="Spring">Spring</option>
+                            <option value="Fall">Fall</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="rowTab">
+                    <div class="labels">
+                        <label for="Based on">Based on: </label>
+                    </div>
+                    <div class="rightTab">
+                        <select id="dropdown-Based on" name="Based on" onchange="getIndex();">
+                            <option selected="selected" value="">-Please Select-</option>
+                            <option value="Frost Dates">Frost Dates</option>
+                            <option value="Moon Dates">Moon Dates</option>
+                            
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div style="color: #ffff; width:500px; float:right; font-size: 20px; top: 50%; left: 50%; margin: 0 auto; padding-top: 100px;">
+            <p class="output" id="dect" style = "color:white;"></p>
+            <p class="moreinfo" id="moreinfo"  style = "color:white;"></p>
+        </div>
+
+    </div>
+    
+    <script>
+
+    var output = document.getElementById('dect');
+    var moreInfo = document.getElementById('moreinfo');
+
+    // let crop = document.getElementById('dropdown-Crop');
+    // let plantingDates = document.getElementById('dropdown-Planting Dates');
+    // let basedOn = document.getElementById('dropdown-Based on');
+
+    // var ranf = 100;
+    // if (ranf == 100) {
+    //     document.getElementById("dect").style.display = "none";
+    //     document.getElementById("moreinfo").style.display = "none";
+    // }
+
+    function getIndex() {
+        var optionCrop = document.getElementById('dropdown-Crop').value;
+        console.log(optionCrop);
+
+        var optionPlantingDates = document.getElementById('dropdown-Planting Dates').value;
+        console.log(optionPlantingDates);
+
+        var optionBasedon = document.getElementById('dropdown-Based on').value;
+        console.log(optionBasedon);
+        
+        if (optionCrop == 'Arugula' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 31-Apr 14";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Arugula' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 31-Apr 5";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Basil' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 14-May 5";
+        }
+        else if (optionCrop == 'Basil' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+             output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 19-May 5";
+        }
+        else if (optionCrop == 'Beets' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 31-Apr 21";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Beets' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors:  Apr 6-18";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Bell Peppers' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2-16";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Bell Peppers' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+             output.innerHTML = "Start Seeds Indoors: Feb 2- 5";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Bok Choy' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 2-17";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Bok Choy' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+             output.innerHTML = "Start Seeds Indoors: Mar 2- 7";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Broccoli' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 17-Apr 7";
+        }
+        else if (optionCrop == 'Broccoli' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+             output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 21-Apr 5";
+        }
+        else if (optionCrop == 'Cabbage' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 17-31";
+        }
+        else if (optionCrop == 'Cabbage' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 21-31";
+        }
+        else if (optionCrop == 'Cantaloupes' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 17-24";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 12";
+        }
+        else if (optionCrop == 'Cantaloupes' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 21-24";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 5";
+        }
+        else if (optionCrop == 'Carrots' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 9-24";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Carrots' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 9-20";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Cauliflower' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 17-Apr 7";
+        }
+        else if (optionCrop == 'Cauliflower' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 21-Apr 5";
+        }
+        else if (optionCrop == 'Celery' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2-16";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Celery' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2- 5";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 21-Apr 5";
+        }
+        else if (optionCrop == 'Chives' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-24";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Chives' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 21-24";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Cilantro (Coriander)' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 14-28";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Cilantro (Coriander)' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 19-28";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Collards' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-31";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Collards' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 21-31";
+            moreInfo.innerHTML = " ";
+        }
+                else if (optionCrop == 'Collards' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-31";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Collards' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 21-31";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Corn' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 28-May 19";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Corn' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 28-May 5, May 19";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Cucumbers' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 17-24";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 12";
+        }
+        else if (optionCrop == 'Cucumbers' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 21-24";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 5";
+        }
+        else if (optionCrop == 'Dill' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 14-May 19";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Dill' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 19-May 5";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Eggplants' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 12";
+        }
+        else if (optionCrop == 'Eggplants' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 5";
+        }
+        else if (optionCrop == 'Fava Beans (Broad Beans)' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Jan 19-Feb 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Jan 21-Feb 2";
+        }
+        else if (optionCrop == 'Fava Beans (Broad Beans)' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 23-Mar 17";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Feb 23-Mar 7";
+        }
+        else if (optionCrop == 'Green Beans' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 21-May 12";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Green Beans' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 21-May 5";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Jalapeño Peppers' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2-16";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Jalapeño Peppers' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2- 5";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Kale' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Feb 16-Mar 2";
+        }
+        else if (optionCrop == 'Kale' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 21-Apr 5";
+        }
+        else if (optionCrop == 'Kohlrabi' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 2-17";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 24-31";
+        }
+        else if (optionCrop == 'Kohlrabi' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 2- 7";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 24-31";
+        }
+        else if (optionCrop == 'Lettuce' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 2-17";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 31-Apr 28";
+        }
+        else if (optionCrop == 'Lettuce' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 2- 7";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 31-Apr 5, Apr 19-28";
+        }
+        else if (optionCrop == 'Okra' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 28-May 12";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Okra' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 28-May 5";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Onions' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-Apr 7";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Onions' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-20, Apr 6- 7";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Oregano' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 14-May 5";
+        }
+        else if (optionCrop == 'Oregano' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors:  Feb 2- 5, Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 19-May 5";
+        }
+        else if (optionCrop == 'Parsley' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-31";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Parsley' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 21-31";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Parsnips' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 24-Apr 14";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Parsnips' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 6-14";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Peas' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 2-24";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Peas' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 2- 7, Mar 21-24";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Potatoes' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-31";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Potatoes' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-20";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Pumpkins' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 24-Apr 7";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 12";
+        }
+        else if (optionCrop == 'Pumpkins' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 24-Apr 5";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 5";
+        }
+        else if (optionCrop == 'Radishes' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Feb 16-Mar 9";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Radishes' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Feb 16-19, Mar 8- 9";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Rosemary' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2-16";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 12";
+        }
+        else if (optionCrop == 'Rosemary' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2- 5";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Sage' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 14-28";
+        }
+        else if (optionCrop == 'Sage' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 19-28";
+        }
+        else if (optionCrop == 'Spinach' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 2-24";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Spinach' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 2- 7, Mar 21-24";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Sweet Potatoes' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: May 5-19";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Sweet Potatoes' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: May 6-18";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Swiss Chard' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 2-17";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 24-31";
+        }
+        else if (optionCrop == 'Swiss Chard' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 2- 7";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Mar 24-31";
+        }
+        else if (optionCrop == 'Thyme' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 14-May 5";
+        }
+        else if (optionCrop == 'Thyme' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 2- 5, Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 19-May 5";
+        }
+        else if (optionCrop == 'Tomatillos' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: May 5-19";
+        }
+        else if (optionCrop == 'Tomatillos' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: May 5";
+        }
+        else if (optionCrop == 'Tomatoes' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 16-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 12";
+        }
+        else if (optionCrop == 'Tomatoes' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Feb 20-Mar 2";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 21-May 5";
+        }
+        else if (optionCrop == 'Turnips' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-Apr 7";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Turnips' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Mar 17-20, Apr 6- 7";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Watermelons' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 17-24";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 12";
+        }
+        else if (optionCrop == 'Watermelons' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Indoors: Mar 21-24";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants: Apr 28-May 5";
+        }
+        else if (optionCrop == 'Winter Squash' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 28-May 26";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Winter Squash' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 28-May 5, May 19-26";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Zucchini and Summer Squash' && optionPlantingDates == 'Spring' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 28-May 26";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Zucchini and Summer Squash' && optionPlantingDates == 'Spring' && optionBasedon == 'Moon Dates')
+        {
+            output.innerHTML = "Start Seeds Outdoors: Apr 28-May 5, May 19-26";
+            moreInfo.innerHTML = " ";
+        }
+        if (optionCrop == 'Arugula' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by Oct 5";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Beets' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 25";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Bell Peppers' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: May 27";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Jul 22";
+        }
+        else if (optionCrop == 'Bok Choy' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 30";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Broccoli' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: Jul 29";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Aug 26";
+        }
+        else if (optionCrop == 'Cabbage' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: Jul 19";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Aug 16";
+        }
+        else if (optionCrop == 'Cantaloupes' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Jul 12";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Carrots' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 20";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Cauliflower' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: Jul 29";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Aug 26";
+        }
+        else if (optionCrop == 'Celery' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: May 18";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Jul 27";
+        }
+        else if (optionCrop == 'Collards' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 10";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Corn' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Aug 1";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Cucumbers' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Aug 6";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Eggplants' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: May 27";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Jul 22";
+        }
+        else if (optionCrop == 'Fava Beans (Broad Beans)' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 10";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Green Beans' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Aug 6";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Jalapeño Peppers' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: Jun 16";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Aug 11";
+        }
+        else if (optionCrop == 'Kale' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: Aug 18";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Sep 15";
+        }
+        else if (optionCrop == 'Kohlrabi' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 20";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Lettuce' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 30";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Okra' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Aug 1";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Parsnips' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Aug 6";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Peas' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 5";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Potatoes' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Jul 22";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Pumpkins' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Jun 22";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Radishes' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Oct 5";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Spinach' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Oct 15";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Sweet Potatoes' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: Jun 7";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Jul 12";
+        }
+        else if (optionCrop == 'Swiss Chard' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 30";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Tomatillos' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Aug 1";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Tomatoes' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Indoors by: Jun 1";
+            moreInfo.innerHTML = "Plant Seedlings or Transplants by: Jul 27";
+        }
+        else if (optionCrop == 'Turnips' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Sep 30";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Watermelons' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Jul 12";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Winter Squash' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Jul 27";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == 'Zucchini and Summer Squash' && optionPlantingDates == 'Fall' && optionBasedon == 'Frost Dates') 
+        {
+            output.innerHTML = "Start Seeds Outdoors by: Aug 11";
+            moreInfo.innerHTML = " ";
+        }
+        else if (optionCrop == '' || optionPlantingDates == '' || optionBasedon == '')
+        {
+            output.innerHTML = "Please fill in all columns!";
+            moreInfo.innerHTML = " ";
+        }
+        else {
+            output.innerHTML = "Sorry, the information is current unavailable in the system.";
+            moreInfo.innerHTML = "Please try another one :)";
+        }
+    }
+
+</script>
+</html>
+    
