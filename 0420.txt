@@ -1,0 +1,32 @@
+API：
+气体排放：
+https://www.greenhouseaccounts.climatechange.gov.au/
+
+
+Australia’s emissions projections 2022
+https://www.dcceew.gov.au/climate-change/publications/australias-emissions-projections-2022
+
+
+https://edstem.org/au/courses/10678/lessons/31117/slides/218843
+https://edstem.org/au/courses/10678/lessons/31086/slides/218763
+
+
+
+(Unfinished, update next week )
+
+1. 能源年报
+2. 家用能源计算 太阳能
+3.交通计算 不同交通出行方式的各种结算 绿色出行交通方式
+
+solar:
+Despite promising growth in renewables, power sector emissions had the largest sectoral growth
+。。。
+Reductions in emissions from natural gas were more than replaced by emissions from coal
+。。。。
+
+Energy-related greenhouse gas emissions reached 41.3 Gt CO2-eq in 2022
+
+Total energy-related greenhouse gas emissions increased by 1.0% to an all-time high of 41.3 Gt CO2-eq (see “Data sources and method” for global warming potential values). CO2 emissions from energy combustion and industrial process accounted for 89% of energy-related greenhouse gas emissions in 2022.
+
+Methane from energy combustion, leaks and venting represented another 10%, mostly coming from onshore oil and gas operations as well as steam coal production. Methane emissions rose to nearly 135 Mt CH4 or around 4 Gt CO2-eq in 2022, despite high natural gas prices that increased the cost effectiveness of methane abatement technologies.
+

@@ -1,0 +1,20 @@
+Melb UV CSV annual
+https://data.gov.au/dataset/ds-dga-fb836013-f300-4f92-aa1e-fb5014aea40e/details
+
+UV LINE graph
+https://uv.willyweather.com.au/vic/melbourne/melbourne.html
+
+Call forecast UV data & Call historical UV data
+https://openweathermap.org/api/uvi
+
+Global Real-Time UV Index JSON API
+https://www.openuv.io/
+
+api backups:
+https://developer.niwa.co.nz/docs/uv-api/latest/routes/chart.png/get
+
+https://www.npmjs.com/package/uv-api
+
+=========
+Green Transportation
+Developing innovative and sustainable transportation solutions, such as electric or hydrogen-powered vehicles, or a network of bike-sharing programs. The project could involve partnerships with local government agencies and transportation providers to promote sustainable transportation options and reduce greenhouse gas emissions. The problem statement for this project could be: How can we reduce the carbon footprint associated with transportation while improving accessibility and affordability for all members of the community?
