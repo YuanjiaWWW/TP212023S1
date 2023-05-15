@@ -1,0 +1,216 @@
+<html>
+<div style="color: #ffff; width: 850px;">
+    <div class="container" style="color: #ffff;">
+
+        <form class="dropdown" action="" method="post" enctype="multipart/form-data">
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="Tree">Plant: </label>
+                </div>
+                <div class="rightTab">
+                    <select id="dropdown-Tree" name="Tree" onchange="getIndex();">
+                        <option selected="selected" value="">-Please Select-</option>
+                        <option value="Norway maple (Acer platanoides)">Norway maple (Acer platanoides)</option>
+                        <option value="Silver birch (Betula pendula)">Silver birch (Betula pendula)</option>
+                        <option value="Turkey oak (Quercus cerris)">Turkey oak (Quercus cerris)</option>
+                        <option value="Ginkgo (Ginkgo Biloba)">Ginkgo (Ginkgo Biloba)</option>
+                        <option value="Largeleaf linden (Tilia Plathyphyllos)">Largeleaf linden (Tilia Plathyphyllos)
+                        </option>
+                        <option value="Mediterranean hackberry (Celtis australis)">Mediterranean hackberry (Celtis
+                            australis)</option>
+                        <option value="Littleleaf Linden (Tilia cordata)">Littleleaf Linden (Tilia cordata)</option>
+                        <option value="Field Elm (Ulmus minor)">Field Elm (Ulmus minor)</option>
+                        <option value="Common ash (Fraxinus excelsior)">Common ash (Fraxinus excelsior)</option>
+                        <option value="Black alder (Alnus glutinosa)">Black alder (Alnus glutinosa)</option>
+
+                        <option value="Areca Palm">Areca Palm</option>
+                        <option value="Snake Plant">Snake Plant</option>
+                        <option value="Money Plant">Money Plant</option>
+                        <option value="Gerbera Daisy (Gerbera Jamesonii)">Gerbera Daisy (Gerbera Jamesonii)</option>
+                        <option value="Chinese Evergreens">Chinese Evergreens</option>
+                        <option value="Spider Plant">Spider Plant</option>
+                        <option value="Aloe Vera">Aloe Vera</option>
+                        <option value="Broad lady palm">Broad lady palm</option>
+                        <option value="Red-edged Dracaena or Dragon Trees">Red-edged Dracaena or Dragon Tree</option>
+                        <option value="Weeping fig">Weeping fig</option>
+                        <option value="Chrysanthemum">Chrysanthemum</option>
+                        <option value="Rubber plant">Rubber plant</option>
+                        <option value="Boston Fern">Boston Fern</option>
+                        <option value="Dragon Tree">Dragon Tree</option>
+
+                        <option value="Bamboo Palm">Bamboo Palm</option>
+                        <option value="Peace Lilly">Peace Lilly</option>
+
+                    </select>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+
+    <div
+        style="color: #ffff; font-size: 20px; top: 50%; left: 50%; margin: 0 auto; padding-top: 100px;">
+        <p class="output" id="dect" style="color:white;"></p>
+        <p class="moreinfo" id="moreinfo" style="color:white;"></p>
+    </div>
+
+</div>
+
+<script>
+
+    var output = document.getElementById('dect');
+    var moreInfo = document.getElementById('moreinfo');
+
+    // let crop = document.getElementById('dropdown-Crop');
+    // let plantingDates = document.getElementById('dropdown-Planting Dates');
+    // let basedOn = document.getElementById('dropdown-Based on');
+
+    // var ranf = 100;
+    // if (ranf == 100) {
+    //     document.getElementById("dect").style.display = "none";
+    //     document.getElementById("moreinfo").style.display = "none";
+    // }
+
+    function getIndex() {
+        var tree = document.getElementById('dropdown-Tree').value;
+        console.log(tree);
+
+        if (tree == 'Areca Palm') {
+            output.innerHTML = "Can take in carbon dioxide and release oxygen.";
+            moreInfo.innerHTML = "Can remove dangerous chemicals.";
+        }
+        else if (tree == 'Snake Plant') {
+            output.innerHTML = "Nighttime oxygen production.";
+            moreInfo.innerHTML = "Removal of benzene, formaldehyde, trichloroethylene, xylene, and toluene.";
+        }
+        else if (tree == 'Money Plant') {
+            output.innerHTML = "Remove chemicals and other pollutants from the air, specifically benzene, formaldehyde, xylene, and toluene.";
+            moreInfo.innerHTML = "toxic to cats, dogs, and small children if its leaves are ingested.";
+        }
+        else if (tree == 'Gerbera Daisy (Gerbera Jamesonii)') {
+            output.innerHTML = "Produce high levels of oxygen at night while removing harmful chemicals, such as benzene and trichloroethylene.";
+            moreInfo.innerHTML = "eneficial for those suffering from sleep apnea and breathing disorders.";
+
+        }
+        else if (tree == 'Chinese Evergreens') {
+            output.innerHTML = "Emits a high oxygen content while purifying indoor spaces of harmful chemicals such as benzene, formaldehyde and other toxins.";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Spider Plant') {
+            output.innerHTML = "Battle toxins including carbon monoxide and xylene";
+            moreInfo.innerHTML = "Non-toxic to animals";
+
+        }
+        else if (tree == 'Aloe Vera') {
+            output.innerHTML = "Loves a sunny spot";
+            moreInfo.innerHTML = "Purifying the air of formaldehyde and benzene, found in varnishes, floor finishes, and detergents.";
+
+        }
+        else if (tree == 'Broad lady palm') {
+            output.innerHTML = "Expensive to buy fully-grown";
+            moreInfo.innerHTML = "Can help reduce levels of ammonia";
+
+        }
+        else if (tree == 'Red-edged Dracaena or Dragon Tree') {
+            output.innerHTML = "Trichloroethylene and xylene are amongst the pollutants fought by this spiky, slow-growing plant.";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Weeping fig') {
+            output.innerHTML = "Help to tackle levels of formaldehyde, xylene, and toluene.";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Chrysanthemum') {
+            output.innerHTML = "Help to filter out a host of toxins including ammonia and benzene";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Rubber plant') {
+            output.innerHTML = "Their large leaves can absorb airborne chemicals and break them down.";
+            moreInfo.innerHTML = "Rubber plants also eliminate bacteria and mold spores in the air.";
+
+        }
+        else if (tree == 'Boston Fern') {
+            output.innerHTML = "Help restore moisture in the air";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Dragon Tree') {
+            output.innerHTML = "rids the air of the benzene (given off by cigarette smoke and household cleaning chemicals).";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Bamboo Palm') {
+            output.innerHTML = "Removing benzene and trichloroethylene chemicals from the air.";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Peace Lilly') {
+            output.innerHTML = "It’s known to be a purifying fan fave";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Norway maple (Acer platanoides)') {
+            output.innerHTML = "Can absorb up to 3800 kilos of CO2 in twenty-years time.";
+            moreInfo.innerHTML = "Playing a role in mitigating pollution and demolishing the heat islands of urban contexts.";
+
+        }
+        else if (tree == 'Silver birch (Betula pendula)') {
+            output.innerHTML = "Is able to grow in most difficult conditions";
+            moreInfo.innerHTML = "Is capable of absorbing up to 3100 kilos of CO2 to clean the air.";
+
+        }
+        else if (tree == 'Turkey oak (Quercus cerris)') {
+            output.innerHTML = "Absorbing up to 3,1 tons of carbon dioxide.";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Ginkgo (Ginkgo Biloba)') {
+            output.innerHTML = "Absorbing up to 2800 kilos of CO2.";
+            moreInfo.innerHTML = "Fundamental barrier against gas, clouds of dust and heat, being perfectly adaptable to soils of every kind (urban soils too).";
+
+        }
+        else if (tree == 'Largeleaf linden (Tilia Plathyphyllos)') {
+            output.innerHTML = "An impressively high capacity of reducing pollutants.";
+            moreInfo.innerHTML = "Most common in urban streets and parks";
+
+        }
+        else if (tree == 'Mediterranean hackberry (Celtis australis)') {
+            output.innerHTML = "Tremendously suited in absorbing carbon dioxide, up to 3,660 kilos in 20 years).";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Littleleaf Linden (Tilia cordata)') {
+            output.innerHTML = "Excellent capabilities of capturing Co2 and reducing urban smog.";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Field Elm (Ulmus minor)') {
+            output.innerHTML = "Can transform thousands of Co2 kilos into biomass.";
+            moreInfo.innerHTML = " ";
+
+        }
+        else if (tree == 'Common ash (Fraxinus excelsior)') {
+            output.innerHTML = "Absorbs more than 3000 kilos of CO2 in 30 years time.";
+            moreInfo.innerHTML = "A perfect ally in cleaning the air and eliminating pollutants.";
+
+        }
+        else if (tree == 'Black alder (Alnus glutinosa)') {
+            output.innerHTML = "Can stop up to 2600 kilos of CO2";
+            moreInfo.innerHTML = "Has a strong absorbing power against gas pollutants.";
+
+        }
+        else {
+            output.innerHTML = "Sorry, the information is current unavailable in the system.";
+            moreInfo.innerHTML = "Please try another one :)";
+        }
+    }
+
+</script>
+
+</html>
